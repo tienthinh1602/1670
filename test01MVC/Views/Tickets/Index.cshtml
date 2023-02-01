@@ -1,0 +1,73 @@
+﻿@*@model IEnumerable<test01MVC.Models.Ticket>*@
+    @model test01MVC.Models.TicketGenreVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-controller="Tickets" asp-action="Index">
+    <p>
+        <select asp-for="TicketGenre" asp-items="Model.Genres">
+        <option value="">All</option>
+        </select>
+        Title: <input type="text" name="timKiem"/>
+    <input type="submit" value="Tim kiem" />
+    
+</p>
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Tieu de
+            </th>
+            <th>
+                CreatedDate
+               @* @Html.DisplayNameFor(model => model.CreatedDate)*@
+            </th>
+            <th>Price
+               @* @Html.DisplayNameFor(model => model.Price)*@
+            </th>
+            <th>Genre
+               @* @Html.DisplayNameFor(model => model.Genre)*@
+            </th>
+            <th>Image</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Tickets) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                 <img src="@item.Image" alt="Sample Image" width="300px" />
+                
+            </td>
+
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
