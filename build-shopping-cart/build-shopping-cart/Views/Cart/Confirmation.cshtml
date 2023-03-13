@@ -1,0 +1,33 @@
+﻿@model Order
+
+<h1>Thank You for Your Order!</h1>
+
+<p>Your order has been received and will be processed shortly.</p>
+
+<h2>Order Details</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderItems)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td>$@item.Product.Price</td>
+                <td>@item.Quantity</td>
+                <td>$@(item.Product.Price * item.Quantity)</td>
+            </tr>
+        }
+      @*  <tr>
+            <td colspan="3"></td>
+            <td><strong>Total:</strong> $@Model.OrderTotal</td>
+        </tr>*@
+    </tbody>
+</table>

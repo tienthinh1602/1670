@@ -1,0 +1,65 @@
+﻿  @model DisplayImgDemo.ViewModels.EmployeeViewModel
+
+@{
+    ViewData["Title"] = "New";
+}
+ 
+
+<div class="col-md-6 offset-md-3 mt-5">
+       <a target="_blank" href="https://getform.io?ref=codepenHTML">
+          <img src='https://i.imgur.com/O1cKLCn.png'>
+        </a>
+        <br>
+        <a target="_blank" href="https://getform.io?ref=codepenHTML" class="mt-3 d-flex">Getform.io |  Get your free endpoint now</a>
+        <h1>Getform.io HTML Form Example with File Upload</h1>
+        <form accept-charset="UTF-8" asp-action="New2" enctype="multipart/form-data" target="_blank">
+          <div class="form-group">
+            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+          </div>
+          <div class="form-group">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+          <div class="form-group">
+             <label asp-for="Gender" class="control-label"></label>
+                            <select asp-for="Gender" class="form-control">
+                                <option value="">Choose Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+          </div>
+           <div class="form-group">
+                            <label asp-for="Age" class="control-label"></label>
+                            <input asp-for="Age" class="form-control" />
+                            <span asp-validation-for="Age" class="text-danger"></span>
+                        </div>
+<div class="form-group">
+                            <label asp-for="Position" class="control-label"></label>
+                            <input asp-for="Position" class="form-control" />
+                            <span asp-validation-for="Position" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Office" class="control-label"></label>
+                            <input asp-for="Office" class="form-control" />
+                            <span asp-validation-for="Office" class="text-danger"></span>
+                        </div>
+<div class="form-group">
+                            <label asp-for="Salary" class="control-label"></label>
+                            <input asp-for="Salary" class="form-control" />
+                            <span asp-validation-for="Salary" class="text-danger"></span>
+                        </div>
+
+          <hr>
+          <div class="form-group mt-3">
+            <label class="mr-2">Upload your CV:</label>
+            <input type="file" name="file" asp-for="ProfilePicture" class="form-control">
+          </div>
+          <hr>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div> 
+    

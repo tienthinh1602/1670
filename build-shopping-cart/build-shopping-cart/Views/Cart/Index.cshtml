@@ -1,0 +1,37 @@
+﻿<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CartItems)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td>$@item.Product.Price</td>
+                <td>@item.Quantity</td>
+                <td>
+                    <form asp-action="RemoveFromCart" asp-controller="Cart" method="post">
+                        <input type="hidden" name="productId" value="@item.Product.Id" />
+                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td>$@Model.TotalPrice</td>
+        </tr>
+    </tfoot>
+</table>
+
+@if (Model.CartItems.Count > 0)
+{
+    <a asp-action="Checkout" asp-controller="Cart" class="btn btn-primary">Checkout</a>
+}

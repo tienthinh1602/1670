@@ -1,0 +1,126 @@
+﻿@{
+    ViewData["Title"] = "ListCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .list-cart {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cart {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart th, .cart td {
+  padding: 10px;
+  text-align: center;
+}
+
+.cart th {
+  background-color: #f8f8f8;
+  font-weight: bold;
+}
+
+.cart td {
+  background-color: #fff;
+}
+
+.cart tr:hover {
+  background-color: #f8f8f8;
+}
+
+.cart .btn {
+  margin: 0 5px;
+}
+
+.cart .btn:hover {
+  background-color: #f8f8f8;
+}
+
+.cart .text-right {
+  text-align: right;
+}
+
+.cart .total {
+  font-weight: bold;
+}
+</style>
+<script src="~/js/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".updateCart").click(function (event) {
+            event.preventDefault();
+            var quantity = $(".quantity_" + $(this).attr("data-id")).val();
+            console.log(quantity);
+            $.ajax({
+                type: "POST",
+                url:"@Url.Action("updateCart","Product")",
+                data: {
+                    id: $(this).attr("data-id"),
+                    quantity:quantity
+                },
+                success: function (result) {
+                    window.location.href = '@Url.Action("ListCart","Product")';
+                }
+            });
+        });
+    });
+</script>
+
+<div class="list-cart">
+    <table class="cart" border="1">
+        <tr>
+            <th>STT</th>
+            <th>Title</th>
+            <th>Image</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total Price</th>            
+            <th>Delete</th>
+        </tr>
+            @{
+                int STT = 0;
+                decimal thanhtien = 0;
+                foreach (var item in ViewBag.carts)
+                {
+                    //string txt_class = "quantity_" + item.Product.ProductID;
+                    STT++;
+                    //int total = item.Product.Price * item.Quantity;
+                decimal total = item.Product.Price * item.Quantity;
+                thanhtien += total;
+                //caloriesBurned = Convert.ToInt32(Decimal.Multiply(maleusage, textBoxInt));
+                <tr>
+                    <td>@STT</td>
+                    <td>@item.Product.Name</td>
+                    <td><img src="~/images/@item.Product.ImageUrl" width="100" height="100" /></td>
+                    <td class="text-center">
+                    <a class="btn btn-default" asp-controller="Products"
+                    asp-action="decreaseQuantity" asp-route-id="@item.Product.Id"><b>-</b</a>          
+                    <b>@item.Quantity</b>          
+                    <a class="btn btn-default" asp-controller="Products"
+                    asp-action="increaseQuantity" asp-route-id="@item.Product.Id"><b>+</b></a>
+                    </td>
+                    
+                    <td>@item.Product.Price</td>
+                    <td>@total</td>   
+                    <td><a asp-controller="Products" asp-action="deleteCart" asp-route-id="@item.Product.Id" class="btn btn-danger">Delete</a></td>
+                </tr>
+            }
+            <tr>
+          <td colspan="4" class="text-right">Tổng tiền</td>
+          <td>@(thanhtien.ToString("n0"))</td>
+          <td></td>
+      </tr>
+            <td><a asp-controller="Products" asp-action="Index" >Continue Shopping</a></td>
+            <td><a asp-controller="Products" asp-action="Checkout" >Check</a></td>
+            
+        }
+
+    </table>
+</div>
+
+
+
+
